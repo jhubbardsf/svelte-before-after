@@ -20,7 +20,9 @@
 		</div>
 
 		<input bind:value={slider} type="range" class="my-slider" min="0" step="1" />
-		<div class="scroll-thumb" style="left: {slider}%;" />
+		<div class="scroll-thumb" style="left: {slider}%;">
+			<div class="arrows" />
+		</div>
 	</div>
 </section>
 
@@ -57,11 +59,10 @@
 			--width: 4px; // 4px
 
 			border-width: var(--width);
-			@apply h-[var(--diameter)] w-[var(--diameter)] rounded-full z-[1] top-1/2 -translate-x-1/2 -translate-y-1/2;
+			@apply h-[var(--diameter)] w-[var(--diameter)] rounded-full z-[1] self-center -translate-x-1/2 flex items-center justify-center;
 			&:before,
 			&:after {
-				content: '';
-				@apply h-[9999px] w-[var(--width)] left-1/2 -translate-x-1/2 absolute bg-white block;
+				@apply h-[9999px] w-[var(--width)] left-1/2 -translate-x-1/2 absolute bg-white block content-[''];
 			}
 
 			&:before {
@@ -69,6 +70,23 @@
 			}
 			&:after {
 				@apply top-full;
+			}
+
+			.arrows {
+				@apply grid grid-cols-2 gap-3;
+				&::before,
+				&::after {
+					@apply bg-white block w-3 h-2 content-[''];
+					clip-path: polygon(50% 0, 100% 100%, 0% 100%);
+				}
+
+				&::before {
+					@apply -rotate-90;
+				}
+
+				&::after {
+					@apply rotate-90;
+				}
 			}
 		}
 	}
