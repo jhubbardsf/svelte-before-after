@@ -33,10 +33,9 @@
 	</div>
 </header>
 
-<style lang='scss'>
+<style lang="scss">
 	header {
-		display: flex;
-		justify-content: space-between;
+		@apply flex justify-between items-center;
 	}
 
 	.corner {
