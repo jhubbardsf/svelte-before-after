@@ -13,21 +13,27 @@
 	</header>
 
 	<div class="slider-images">
-		<div style="width: {slider}%;">
+		<img class="before" src="before.png" alt="before" width="500" height="500" />
+
+		<div class="after-container" style="width: {slider}%;">
 			<img class="after" src="after.png" alt="after" width="500" height="500" />
 		</div>
 
-		<img class="before" src="before.png" alt="before" width="500" height="500" />
 		<input bind:value={slider} type="range" class="my-slider" min="0" step="1" />
+		<div class="scroll-thumb" style="left: {slider}%;" />
 	</div>
 </section>
 
 <style lang="scss">
 	.slider-images {
-		@apply grid;
+		@apply grid row-[1/1] col-[1/1] overflow-hidden relative;
 
 		div {
-			@apply row-[1/1] col-[1/1] overflow-hidden relative border-r-2 border-white;
+			@apply row-[1/1] col-[1/1] relative border-white;
+		}
+
+		.after-container {
+			@apply overflow-hidden;
 		}
 
 		img {
@@ -39,28 +45,32 @@
 		}
 
 		input {
-			@apply row-[1/1] col-[1/1] z-[1] h-0 self-center appearance-none;
-		}
-	}
+			@apply row-[1/1] col-[1/1] z-[2] appearance-none h-full bg-transparent cursor-pointer;
 
-	input[type='range'] {
-		height: 100%;
-		cursor: pointer;
-		background: rgba(0, 0, 0, 0);
-	}
-	input[type='range']:focus {
-		outline: none;
-	}
-	input[type='range']::-webkit-slider-runnable-track {
-		cursor: pointer;
-	}
-	input[type='range']::-webkit-slider-thumb {
-		height: 25px;
-		width: 25px;
-		border-radius: 100%;
-		background: rgba(0, 0, 0, 0);
-		cursor: pointer;
-		-webkit-appearance: none;
+			&::-webkit-slider-thumb {
+				@apply appearance-none w-1;
+			}
+		}
+
+		.scroll-thumb {
+			--diameter: 50px; // 40px
+			--width: 4px; // 4px
+
+			border-width: var(--width);
+			@apply h-[var(--diameter)] w-[var(--diameter)] rounded-full z-[1] top-1/2 -translate-x-1/2 -translate-y-1/2;
+			&:before,
+			&:after {
+				content: '';
+				@apply h-[9999px] w-[var(--width)] left-1/2 -translate-x-1/2 absolute bg-white block;
+			}
+
+			&:before {
+				@apply bottom-full;
+			}
+			&:after {
+				@apply top-full;
+			}
+		}
 	}
 
 	//OLD
