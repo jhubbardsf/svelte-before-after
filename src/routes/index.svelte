@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '../app.scss';
+
 	let slider = 50;
 </script>
 
