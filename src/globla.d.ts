@@ -1,0 +1,1 @@
+declare module '@jhubbardsf/vite-plugin-svelte-inspector';
